@@ -1,6 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This proxy was created with the Next.js API. It is ready to be launched on Vercel. See below for more details on how to launch.
 
-## Getting Started
+
+## Getting Started w
 
 First, run the development server:
 
