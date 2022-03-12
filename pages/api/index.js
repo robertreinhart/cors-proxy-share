@@ -1,22 +1,20 @@
-const express = require('express');
-const request = require('request');
+const axios = require('axios');
 
 export default function handler(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  request.get(
-    { url: req.body['my-url'] },
-    (error, response, body) => {
-      console.log(body)
-      if (error || response.statusCode !== 200) {
-        console.log("__________")
-        if (error) {
-          return res.status(500).json({ type: 'error', message: error.message });
-        } else {
-          return res.status(response.statusCode).json({ type: 'error', message: response.statusMessage });
-        }
+  async function getURI(url) {
+    try {
+      const response = await axios.get(url);
+      console.log(response)
+      if (response.status !== 200) {
+        return res.status(response.status).json({ type: 'error', message: response.statusText });
+      } else {
+      res.json(response.data);
       }
-
-      res.json(JSON.parse(body));
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ type: 'error', message: error.message });
     }
-  )
+  }
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  getURI(req.body['my-url'])
 }
