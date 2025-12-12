@@ -6,7 +6,7 @@ export default function handler(req, res, next) {
       const response = await axios.get(url);
       console.log(response)
       if (response.status !== 200) {
-        return res.status(response.status).json({ type: 'error', message: response.statusText });
+        return res.status(response.status).json({ type: 'error', status:response.status, message: response.statusText });
       } else {
       res.json(response.data);
       }
