@@ -12,7 +12,7 @@ export default function handler(req, res, next) {
       }
     } catch (error) {
       console.log(error)
-      return res.status(500).json({ type: 'error', message: error.message });
+      return res.status(500).json({ type: 'error', status:"500", message: error.message });
     }
   }
   res.setHeader('Access-Control-Allow-Origin', '*');
