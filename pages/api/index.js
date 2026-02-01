@@ -1,7 +1,9 @@
 const axios = require("axios");
 
 export default function handler(req, res, next) {
-  async function getURI(url) {
+    console.log(req.query.url);
+    const url = req.query.url;
+  async function getURI() {
     try {
       const response = await axios.get(url);
       if (response.status !== 200) {
@@ -14,10 +16,10 @@ export default function handler(req, res, next) {
         return res.json(response.data);
       }
     } catch (error) {
-      console.log(error.response)
+      console.log("ERROR ", error.message);
       return res.status(500).json({ type: "error", message: error.message });
     }
   }
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  getURI(req.headers["my-url"]);
+
+  getURI();
 }
